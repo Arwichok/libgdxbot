@@ -54,7 +54,7 @@ async def done(msg: ats.Message, state: FSMContext):
         await Link.create(url=proxy['url'], title=title)
 
     await state.finish()
-    await msg.answer(f"Thanks for adding url")
+    await msg.answer(f"Link added")
 
 
 @dp.message_handler(state=AddLink.title)
@@ -64,4 +64,5 @@ async def add_title(msg: ats.Message, state: FSMContext):
     """
     async with state.proxy() as proxy:
         await Link.create(url=proxy['url'], title=msg.text)
+        await msg.answer("Link added")
     await state.finish()
